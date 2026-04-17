@@ -1,138 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Countdown 1080p</title>
+<meta charset="UTF-8">
+<title>Countdown</title>
 
-  <style>
-    /* ===== FIXED 1080p CANVAS ===== */
-    body {
-      margin: 0;
-      padding: 0;
-      width: 1920px;
-      height: 1080px;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background: black;
-    }
+<style>
+  body {
+    margin: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: black;
+  }
 
-    /* ===== BACKGROUND VIDEO ===== */
-    video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 1920px;
-      height: 1080px;
-      object-fit: cover;
-      z-index: -1;
-    }
+  /* VIDEO BACKGROUND (GPU-friendly) */
+  video {
+    position: fixed;
+    width: 1920px;
+    height: 1080px;
+    object-fit: cover;
+    transform: translateZ(0);
+  }
 
-    /* dark overlay */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 1920px;
-      height: 1080px;
-      background: rgba(0, 0, 0, 0.1);
-    }
 
-    /* ===== COUNTDOWN (1080p CENTERED) ===== */
-    .countdown {
-      position: absolute;
-      top: 640px;   /* center of 1080 */
-      left: 1280px;  /* center of 1920 */
-      transform: translate(-50%, -50%);
-      display: flex;
-      gap: 20px;
-      text-align: center;
-    }
+  /* COUNTDOWN */
+  .countdown {
+    position: absolute;
+    top: 540px;
+    left: 960px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 70px;
+    text-align: center;
+  }
 
-    .time-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 140px;
-    }
+  .box {
+    min-width: 140px;
+  }
 
-    /* numbers */
-    .time-box div:first-child {
-      font-size: 4.5rem;
-      font-weight: bold;
-      color: #33BBED;
-    }
+  .num {
+    font-size: 4.5rem;
+    color: #33BBED;
+    font-weight: bold;
+  }
 
-    /* labels */
-    .label {
-      font-size: 1.5rem;
-      margin-top: 10px;
-      color: white;
-      letter-spacing: 2px;
-      opacity: 1;
-    }
-  </style>
+  .label {
+    font-size: 1.6rem;
+    color: white;
+    margin-top: 10px;
+    letter-spacing: 2px;
+  }
+</style>
 </head>
 
 <body>
 
-  <!-- Background Video -->
-  <video autoplay muted loop playsinline>
-    <source src="commencement3.mp4" type="video/mp4">
-  </video>
+<video autoplay muted loop playsinline preload="auto">
+  <source src="commencement3.mp4" type="video/mp4">
+</video>
 
-  <div class="overlay"></div>
+<div class="overlay"></div>
 
-  <!-- Countdown -->
-  <div class="countdown">
-    <div class="time-box">
-      <div id="days">0</div>
-      <div class="label">Days</div>
-    </div>
-
-    <div class="time-box">
-      <div id="hours">0</div>
-      <div class="label">Hours</div>
-    </div>
-
-    <div class="time-box">
-      <div id="minutes">0</div>
-      <div class="label">Minutes</div>
-    </div>
-
-    <div class="time-box">
-      <div id="seconds">0</div>
-      <div class="label">Seconds</div>
-    </div>
+<div class="countdown">
+  <div class="box">
+    <div id="d" class="num">0</div>
+    <div class="label">Days</div>
   </div>
 
-  <script>
-    const targetDate = new Date("2026-05-15T11:00:00").getTime();
+  <div class="box">
+    <div id="h" class="num">0</div>
+    <div class="label">Hours</div>
+  </div>
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+  <div class="box">
+    <div id="m" class="num">0</div>
+    <div class="label">Minutes</div>
+  </div>
 
-      if (distance <= 0) {
-        document.querySelector(".countdown").innerHTML = "Time's up!";
-        return;
-      }
+  <div class="box">
+    <div id="s" class="num">0</div>
+    <div class="label">Seconds</div>
+  </div>
+</div>
 
-      document.getElementById("days").innerText =
-        Math.floor(distance / (1000 * 60 * 60 * 24));
+<script>
+const target = new Date("2026-06-01T12:00:00").getTime();
 
-      document.getElementById("hours").innerText =
-        Math.floor((distance / (1000 * 60 * 60)) % 24);
+function tick() {
+  const now = Date.now();
+  const diff = target - now;
 
-      document.getElementById("minutes").innerText =
-        Math.floor((distance / (1000 * 60)) % 60);
+  if (diff <= 0) return;
 
-      document.getElementById("seconds").innerText =
-        Math.floor((distance / 1000) % 60);
-    }
+  document.getElementById("d").textContent = Math.floor(diff / 86400000);
+  document.getElementById("h").textContent = Math.floor(diff / 3600000 % 24);
+  document.getElementById("m").textContent = Math.floor(diff / 60000 % 60);
+  document.getElementById("s").textContent = Math.floor(diff / 1000 % 60);
+}
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+tick();
+setInterval(tick, 1000);
+</script>
 
 </body>
 </html>
