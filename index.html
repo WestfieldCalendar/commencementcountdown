@@ -5,71 +5,77 @@
   <title>Countdown</title>
 
   <style>
-    body, html {
+    /* ===== FIXED DESIGN CANVAS ===== */
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
+      width: 1920px;
+      height: 837px;
       overflow: hidden;
       font-family: Arial, sans-serif;
+      background: black;
     }
 
-    /* Background video */
+    /* ===== BACKGROUND VIDEO ===== */
     video {
       position: fixed;
       top: 0;
       left: 0;
-      min-width: 100%;
-      min-height: 100%;
+      width: 1920px;
+      height: 837px;
       object-fit: cover;
       z-index: -1;
     }
 
-    /* Dark overlay for readability */
+    /* dark overlay */
     .overlay {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 1920px;
+      height: 837px;
       background: rgba(0, 0, 0, 0.4);
     }
 
-    /* Countdown container */
+    /* ===== COUNTDOWN (PHOTOSHOP POSITIONING) ===== */
     .countdown {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 420px;   /* vertical placement */
+      left: 960px;  /* horizontal center of 1920 */
       transform: translate(-50%, -50%);
       display: flex;
-      gap: 30px;
+      gap: 60px;
       text-align: center;
-      color: #33BBED;
     }
 
     .time-box {
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-width: 100px;
+      min-width: 140px;
     }
 
+    /* numbers */
     .time-box div:first-child {
       font-size: 4rem;
       font-weight: bold;
+      color: #33BBED;
     }
 
+    /* labels */
     .label {
       font-size: 1rem;
-      margin-top: 8px;
-      opacity: 0.85;
+      margin-top: 10px;
+      color: white;
       letter-spacing: 1px;
+      opacity: 0.9;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Background video -->
+  <!-- Background Video -->
   <video autoplay muted loop playsinline>
     <source src="assets/background.mp4" type="video/mp4">
   </video>
