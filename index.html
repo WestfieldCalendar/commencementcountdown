@@ -8,30 +8,30 @@
   body {
     margin: 0;
     width: 1920px;
-    height: 1080px;
+    height: 837px;
     overflow: hidden;
     font-family: Arial, sans-serif;
     background: black;
   }
 
-  /* VIDEO BACKGROUND (GPU-friendly) */
-  video {
+  /* STATIC BACKGROUND IMAGE */
+  .bg {
     position: fixed;
     width: 1920px;
-    height: 1080px;
+    height: 837px;
     object-fit: cover;
-    transform: translateZ(0);
+    z-index: -1;
   }
 
 
-  /* COUNTDOWN */
+  /* COUNTDOWN (Photoshop-style positioning) */
   .countdown {
     position: absolute;
-    top: 540px;
-    left: 960px;
+    top: 640px;
+    left: 1280px;
     transform: translate(-50%, -50%);
     display: flex;
-    gap: 70px;
+    gap: 30px;
     text-align: center;
   }
 
@@ -40,13 +40,13 @@
   }
 
   .num {
-    font-size: 4.5rem;
+    font-size: 6rem;
     color: #33BBED;
     font-weight: bold;
   }
 
   .label {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     color: white;
     margin-top: 10px;
     letter-spacing: 2px;
@@ -56,12 +56,12 @@
 
 <body>
 
-<video autoplay muted loop playsinline preload="auto">
-  <source src="commencement3.mp4" type="video/mp4">
-</video>
+<!-- BACKGROUND IMAGE -->
+<img class="bg" src="wave.jpg" />
 
 <div class="overlay"></div>
 
+<!-- COUNTDOWN -->
 <div class="countdown">
   <div class="box">
     <div id="d" class="num">0</div>
@@ -85,7 +85,7 @@
 </div>
 
 <script>
-const target = new Date("2026-06-01T12:00:00").getTime();
+const target = new Date("2026-05-15T11:00:00").getTime();
 
 function tick() {
   const now = Date.now();
