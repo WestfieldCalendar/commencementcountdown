@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Countdown</title>
+  <title>Countdown 1080p</title>
 
   <style>
-    /* ===== FIXED DESIGN CANVAS ===== */
+    /* ===== FIXED 1080p CANVAS ===== */
     body {
       margin: 0;
       padding: 0;
       width: 1920px;
-      height: 837px;
+      height: 1080px;
       overflow: hidden;
       font-family: Arial, sans-serif;
       background: black;
@@ -22,20 +22,29 @@
       top: 0;
       left: 0;
       width: 1920px;
-      height: 837px;
+      height: 1080px;
       object-fit: cover;
       z-index: -1;
     }
 
+    /* dark overlay */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      background: rgba(0, 0, 0, 0.4);
+    }
 
-    /* ===== COUNTDOWN (PHOTOSHOP POSITIONING) ===== */
+    /* ===== COUNTDOWN (1080p CENTERED) ===== */
     .countdown {
       position: absolute;
-      top: 420px;   /* vertical placement */
-      left: 1280px;  /* horizontal center of 1920 */
+      top: 540px;   /* center of 1080 */
+      left: 960px;  /* center of 1920 */
       transform: translate(-50%, -50%);
       display: flex;
-      gap: 15px;
+      gap: 60px;
       text-align: center;
     }
 
@@ -48,19 +57,19 @@
 
     /* numbers */
     .time-box div:first-child {
-      font-size: 6rem;
+      font-size: 4.5rem;
       font-weight: bold;
       color: #33BBED;
     }
 
     /* labels */
-  .label {
-  font-size: 1.7rem;
-  color: white;
-  margin-top: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
+    .label {
+      font-size: 1.6rem;
+      margin-top: 10px;
+      color: white;
+      letter-spacing: 2px;
+      opacity: 0.9;
+    }
   </style>
 </head>
 
@@ -68,7 +77,7 @@
 
   <!-- Background Video -->
   <video autoplay muted loop playsinline>
-    <source src="commencementplate2.mp4" type="video/mp4">
+    <source src="assets/background.mp4" type="video/mp4">
   </video>
 
   <div class="overlay"></div>
@@ -97,7 +106,7 @@
   </div>
 
   <script>
-    const targetDate = new Date("2026-05-15T11:00:00").getTime();
+    const targetDate = new Date("2026-05-015T11:00:00").getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
